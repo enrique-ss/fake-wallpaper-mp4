@@ -8,98 +8,130 @@
 </head>
 <body>
   
-  <!-- Video de fundo -->
-<video id="videoBackground" autoplay loop muted playsinline class="active">
-  <source id="videoSource" src="video12.mp4" type="video/mp4">
-</video>
+  <video id="videoBackground" autoplay loop muted playsinline class="active">
+    <source id="videoSource" src="video7.mp4" type="video/mp4">
+  </video>
 
-
-  <!-- Menu de seleção -->
   <div id="menu">
     <h1>SELECIONE UM WALLPAPER</h1>
     <div class="wallpaper-grid">
-      <button class="wallpaper-btn" data-video="video1.mp4">
-        <video class="thumbnail" muted playsinline>
-          <source src="video1.mp4" type="video/mp4">
-        </video>
-        <span class="video-label">Vídeo 1</span>
+      
+      <button class="wallpaper-btn add-video-btn" id="btnAddVideo">
+        <div class="add-icon-container">
+          <svg viewBox="0 0 24 24" width="40" height="40" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+        </div>
+        <span class="video-label">Adicionar Vídeo</span>
       </button>
+      
+      <input type="file" id="videoInput" accept="video/mp4,video/webm,video/mkv" style="display: none;">
+
       <button class="wallpaper-btn" data-video="video2.mp4">
         <video class="thumbnail" muted playsinline>
           <source src="video2.mp4" type="video/mp4">
         </video>
-        <span class="video-label">Vídeo 2</span>
       </button>
+
       <button class="wallpaper-btn" data-video="video3.mp4">
         <video class="thumbnail" muted playsinline>
           <source src="video3.mp4" type="video/mp4">
         </video>
-        <span class="video-label">Vídeo 3</span>
       </button>
+
       <button class="wallpaper-btn" data-video="video4.mp4">
         <video class="thumbnail" muted playsinline>
           <source src="video4.mp4" type="video/mp4">
         </video>
-        <span class="video-label">Vídeo 4</span>
       </button>
+
       <button class="wallpaper-btn" data-video="video5.mp4">
         <video class="thumbnail" muted playsinline>
           <source src="video5.mp4" type="video/mp4">
         </video>
-        <span class="video-label">Vídeo 5</span>
       </button>
+
       <button class="wallpaper-btn" data-video="video6.mp4">
         <video class="thumbnail" muted playsinline>
           <source src="video6.mp4" type="video/mp4">
         </video>
-        <span class="video-label">Vídeo 6</span>
       </button>
+
       <button class="wallpaper-btn" data-video="video7.mp4">
         <video class="thumbnail" muted playsinline>
           <source src="video7.mp4" type="video/mp4">
         </video>
-        <span class="video-label">Vídeo 7</span>
       </button>
+
       <button class="wallpaper-btn" data-video="video8.mp4">
         <video class="thumbnail" muted playsinline>
           <source src="video8.mp4" type="video/mp4">
         </video>
-        <span class="video-label">Vídeo 8</span>
       </button>
+
       <button class="wallpaper-btn" data-video="video9.mp4">
         <video class="thumbnail" muted playsinline>
           <source src="video9.mp4" type="video/mp4">
         </video>
-        <span class="video-label">Vídeo 9</span>
       </button>
+
       <button class="wallpaper-btn" data-video="video10.mp4">
         <video class="thumbnail" muted playsinline>
           <source src="video10.mp4" type="video/mp4">
         </video>
-        <span class="video-label">Vídeo 10</span>
       </button>
+
       <button class="wallpaper-btn" data-video="video11.mp4">
         <video class="thumbnail" muted playsinline>
           <source src="video11.mp4" type="video/mp4">
         </video>
-        <span class="video-label">Vídeo 11</span>
       </button>
+
       <button class="wallpaper-btn" data-video="video12.mp4">
         <video class="thumbnail" muted playsinline>
           <source src="video12.mp4" type="video/mp4">
         </video>
-        <span class="video-label">Vídeo 12</span>
+      </button>
+
+      <button class="wallpaper-btn" data-video="video13.mp4">
+        <video class="thumbnail" muted playsinline>
+          <source src="video13.mp4" type="video/mp4">
+        </video>
+      </button>
+
+      <button class="wallpaper-btn" data-video="video14.mp4">
+        <video class="thumbnail" muted playsinline>
+          <source src="video14.mp4" type="video/mp4">
+        </video>
+      </button>
+
+      <button class="wallpaper-btn" data-video="video15.mp4">
+        <video class="thumbnail" muted playsinline>
+          <source src="video15.mp4" type="video/mp4">
+        </video>
+      </button>
+
+      <button class="wallpaper-btn" data-video="video16.mp4">
+        <video class="thumbnail" muted playsinline>
+          <source src="video16.mp4" type="video/mp4">
+        </video>
+      </button>
+
+      <button class="wallpaper-btn" data-video="video17.mp4">
+        <video class="thumbnail" muted playsinline>
+          <source src="video17.mp4" type="video/mp4">
+        </video>
+      </button>
+
+      <button class="wallpaper-btn" data-video="video18.mp4">
+        <video class="thumbnail" muted playsinline>
+          <source src="video18.mp4" type="video/mp4">
+        </video>
       </button>
     </div>
   </div>
 
-  <!-- Indicador de carregamento -->
-  <div class="loading" id="loading">
-    <div class="spinner"></div>
-    <div>Carregando vídeo...</div>
-  </div>
-
-  <!-- Controles flutuantes -->
   <div id="controls">
     <button class="control-btn" onclick="goBack()">← Voltar</button>
   </div>

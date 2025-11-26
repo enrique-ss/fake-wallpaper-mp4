@@ -112,13 +112,32 @@ h1 {
   border-color: #667eea;
 }
 
-.wallpaper-btn:hover .thumbnail {
-  transform: scale(1.1);
-}
-
 .wallpaper-btn:active {
   transform: translateY(-2px);
 }
+
+/* --- ESTILOS ESPECÍFICOS PARA O BOTÃO ADICIONAR --- */
+.add-video-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #222;
+  border-style: dashed;
+}
+
+.add-icon-container {
+  margin-bottom: 25px;
+  color: #4a9eff;
+  transition: transform 0.3s ease;
+  z-index: 2;
+}
+
+.add-video-btn:hover .add-icon-container {
+  transform: scale(1.2) rotate(90deg);
+  color: #fff;
+}
+/* -------------------------------------------------- */
 
 .thumbnail {
   position: absolute;
@@ -132,6 +151,10 @@ h1 {
   z-index: 0;
 }
 
+.wallpaper-btn:hover .thumbnail {
+  transform: scale(1.1);
+}
+
 .video-label {
   position: absolute;
   bottom: 0;
@@ -142,25 +165,6 @@ h1 {
   text-align: center;
   z-index: 1;
   pointer-events: none;
-}
-
-.exit-btn {
-  width: 100%;
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  border: none;
-  padding: 15px;
-  border-radius: 12px;
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 10px;
-}
-
-.exit-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(245, 87, 108, 0.5);
 }
 
 /* Controles flutuantes */
@@ -193,32 +197,6 @@ h1 {
   background: rgba(50, 50, 50, 0.9);
   border-color: rgba(255, 255, 255, 0.4);
   transform: translateY(-2px);
-}
-
-/* Indicador de carregamento */
-.loading {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 5;
-  color: white;
-  font-size: 18px;
-  display: none;
-}
-
-.loading.active {
-  display: block;
-}
-
-.spinner {
-  border: 3px solid rgba(255, 255, 255, 0.3);
-  border-top: 3px solid white;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
-  margin: 0 auto 10px;
 }
 
 @keyframes spin {
