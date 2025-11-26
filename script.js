@@ -98,44 +98,34 @@ function enterFullscreen() {
   if (!document.fullscreenElement) {
     document.documentElement.requestFullscreen().catch(err => {
       console.log('Não foi possível entrar em tela cheia automaticamente:', err.message);
+      // Tentar novamente após 500ms
+      setTimeout(enterFullscreen, 500);
     });
-  }
-}
-
-function toggleFullscreen() {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen().catch(err => {
-      alert('Erro ao ativar tela cheia: ' + err.message);
-    });
-  } else {
-    document.exitFullscreen();
   }
 }
 
 // Atalhos de teclado
 document.addEventListener('keydown', function(e) {
+  // Bloquear F11 e ESC para não sair da tela cheia
+  if (e.key === 'F11') {
+    e.preventDefault();
+  }
+  
   if (e.key === 'Escape') {
-    if (document.fullscreenElement) {
-      document.exitFullscreen();
-    } else if (!menu.classList.contains('hidden')) {
-      // Não fazer nada se já estiver no menu
-    } else {
+    e.preventDefault();
+    // Se não estiver no menu, voltar para o menu
+    if (menu.classList.contains('hidden')) {
       goBack();
     }
-  } else if (e.key === 'F11') {
-    e.preventDefault();
-    toggleFullscreen();
   } else if (e.key === 'm' || e.key === 'M') {
     goBack();
   }
 });
 
-// Detectar mudanças de fullscreen
+// Garantir que sempre volte para tela cheia
 document.addEventListener('fullscreenchange', function() {
-  const btn = document.querySelector('.control-btn:last-child');
-  if (document.fullscreenElement) {
-    btn.textContent = '⛶ Sair Tela Cheia';
-  } else {
-    btn.textContent = '⛶ Tela Cheia';
+  // Se saiu da tela cheia e há um vídeo ativo, voltar para tela cheia
+  if (!document.fullscreenElement && video.classList.contains('active')) {
+    setTimeout(enterFullscreen, 100);
   }
 });
