@@ -24,9 +24,7 @@ body {
   transition: opacity 0.5s ease;
 }
 
-#videoBackground.active {
-  opacity: 1;
-}
+#videoBackground.active { opacity: 1; }
 
 /* Menu principal */
 #menu {
@@ -133,7 +131,7 @@ h1 {
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
-  pointer-events: none; /* ESSENCIAL: Permite que o clique atravesse a thumbnail e atinja o botão */
+  pointer-events: none;
   z-index: 0;
 }
 
@@ -142,7 +140,6 @@ h1 {
 }
 
 .video-label {
-  /* Mantido para o texto 'Adicionar Vídeo' */
   position: absolute;
   bottom: 0;
   left: 0;
@@ -151,7 +148,6 @@ h1 {
   padding: 15px;
   text-align: center;
   z-index: 1;
-  /* CORREÇÃO: Removido 'pointer-events: none;' para permitir o clique no botão Adicionar */
 }
 
 /* Controles flutuantes */
@@ -186,7 +182,7 @@ h1 {
   transform: translateY(-2px);
 }
 
-/* Indicador de carregamento (REINTEGRADO) */
+/* Indicador de carregamento */
 .loading {
   position: fixed;
   top: 50%;
