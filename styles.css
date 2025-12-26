@@ -133,6 +133,7 @@ h1 {
   transition: transform 0.3s ease;
   pointer-events: none;
   z-index: 0;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
 }
 
 .wallpaper-btn:hover .thumbnail {
@@ -148,6 +149,16 @@ h1 {
   padding: 15px;
   text-align: center;
   z-index: 1;
+}
+
+.thumbnail-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 12px;
+  z-index: 0;
 }
 
 /* Controles flutuantes */

@@ -5,53 +5,108 @@ const controls = document.getElementById('controls');
 const loading = document.getElementById('loading');
 const wallpaperBtnsContainer = document.getElementById('wallpaperGrid');
 
-// 1. LISTA DE VÍDEOS PARA GERAÇÃO DINÂMICA
+// Lista de vídeos (aceita MP4, WebM, etc)
 const videoFiles = [
-    'video2.mp4', 'video3.mp4', 'video4.mp4', 'video5.mp4', 'video6.mp4', 'video7.mp4',
-    'video8.mp4', 'video9.mp4', 'video10.mp4', 'video11.mp4', 'video12.mp4', 'video13.mp4',
-    'video14.mp4', 'video15.mp4', 'video16.mp4', 'video17.mp4', 'video18.mp4'
+    'video2', 'video3', 'video4', 'video5', 'video6', 'video7',
+    'video8', 'video9', 'video10', 'video11', 'video12', 'video13',
+    'video14', 'video15', 'video16', 'video17', 'video18'
 ];
 
-// 2. FUNÇÃO PARA CRIAR E ADICIONAR BOTÕES DE VÍDEO
-function createVideoButtons() {
-    videoFiles.forEach((filename) => {
+// Formatos suportados em ordem de preferência (melhor compressão primeiro)
+const videoFormats = ['.webm', '.mp4'];
+
+// Detecta qual formato existe para cada vídeo
+async function detectVideoFormat(basename) {
+    for (const format of videoFormats) {
+        const url = basename + format;
+        try {
+            const response = await fetch(url, { method: 'HEAD' });
+            if (response.ok) {
+                return url;
+            }
+        } catch (e) {
+            continue;
+        }
+    }
+    return basename + '.mp4'; // Fallback para MP4
+}
+
+// Função para gerar thumbnail JPEG do vídeo
+function generateThumbnail(videoSrc, callback) {
+    const tempVideo = document.createElement('video');
+    tempVideo.preload = 'metadata';
+    tempVideo.muted = true;
+    tempVideo.playsInline = true;
+    
+    tempVideo.addEventListener('loadeddata', function() {
+        tempVideo.currentTime = 1; // Pega frame em 1 segundo
+    });
+    
+    tempVideo.addEventListener('seeked', function() {
+        const canvas = document.createElement('canvas');
+        canvas.width = 480;
+        canvas.height = 270;
+        
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(tempVideo, 0, 0, canvas.width, canvas.height);
+        
+        // Converte para JPEG com qualidade 70%
+        const thumbnailUrl = canvas.toDataURL('image/jpeg', 0.7);
+        
+        // Libera memória
+        tempVideo.src = '';
+        tempVideo.load();
+        
+        callback(thumbnailUrl);
+    });
+    
+    tempVideo.addEventListener('error', function() {
+        callback(null);
+    });
+    
+    tempVideo.src = videoSrc;
+}
+
+// Cria os botões de vídeo com thumbnails
+async function createVideoButtons() {
+    for (let index = 0; index < videoFiles.length; index++) {
+        const basename = videoFiles[index];
         
         const btn = document.createElement('button');
         btn.classList.add('wallpaper-btn');
-        btn.setAttribute('data-video', filename);
         
-        // USO DE preload="metadata" (Compromisso)
-        // Isso permite que o navegador carregue o primeiro frame do vídeo 
-        // para ser usado como miniatura, substituindo o arquivo .jpg.
-        btn.innerHTML = `
-            <video class="thumbnail" muted playsinline preload="metadata">
-                <source src="${filename}" type="video/mp4">
-            </video>
-        `;
-
+        // Placeholder de loading
+        const loadingText = document.createElement('div');
+        loadingText.classList.add('thumbnail-loading');
+        loadingText.textContent = '...';
+        
+        // Label do vídeo
+        const label = document.createElement('span');
+        label.classList.add('video-label');
+        label.textContent = basename.replace('video', 'Wallpaper ');
+        
+        btn.appendChild(loadingText);
+        btn.appendChild(label);
         wallpaperBtnsContainer.appendChild(btn);
-        setupVideoHover(btn);
-    });
-}
-
-// 3. LÓGICA DO HOVER SIMPLIFICADA (Sem o Map de Lazy Load)
-function setupVideoHover(btn) {
-    const thumb = btn.querySelector('.thumbnail');
-    
-    if (thumb) {
-        btn.addEventListener('mouseenter', function() {
-            // Garante que o vídeo toque imediatamente
-            thumb.currentTime = 0;
-            thumb.play().catch(() => {});
-        });
         
-        btn.addEventListener('mouseleave', function() {
-            thumb.pause();
-            // Volta para o primeiro frame (que agora é a miniatura estática)
-            thumb.currentTime = 0; 
-        });
-
-        // Lógica do Clique (Carregamento do Wallpaper principal)
+        // Detecta formato e define
+        const videoPath = await detectVideoFormat(basename);
+        btn.setAttribute('data-video', videoPath);
+        
+        // Gera thumbnail com delay para não travar o navegador
+        setTimeout(() => {
+            generateThumbnail(videoPath, (thumbnailUrl) => {
+                if (thumbnailUrl) {
+                    const img = document.createElement('img');
+                    img.classList.add('thumbnail');
+                    img.src = thumbnailUrl;
+                    btn.insertBefore(img, btn.firstChild);
+                }
+                loadingText.remove();
+            });
+        }, index * 200); // Delay de 200ms entre cada thumbnail
+        
+        // Evento de clique
         btn.addEventListener('click', function() {
             const videoFile = this.getAttribute('data-video');
             if (videoFile) loadVideo(videoFile);
@@ -59,11 +114,10 @@ function setupVideoHover(btn) {
     }
 }
 
-// Inicializa a criação dos botões
+// Inicializa ao carregar a página
 document.addEventListener('DOMContentLoaded', createVideoButtons);
 
-
-// --- LÓGICA DO BOTÃO "ADICIONAR VÍDEO" (Sem alteração) ---
+// Botão "Adicionar Vídeo"
 const btnAdd = document.getElementById('btnAddVideo');
 const inputVideo = document.getElementById('videoInput');
 
@@ -80,8 +134,7 @@ if (btnAdd && inputVideo) {
     });
 }
 
-// --- FUNÇÕES GERAIS (Sem alteração) ---
-
+// Carrega o vídeo selecionado
 function loadVideo(filename) {
     loading.classList.add('active');
     menu.classList.add('hidden');
@@ -109,6 +162,7 @@ function loadVideo(filename) {
     });
 }
 
+// Volta ao menu
 function goBack() {
     if (document.fullscreenElement) {
         document.exitFullscreen().then(() => showMenu()).catch(() => showMenu());
@@ -117,6 +171,7 @@ function goBack() {
     }
 }
 
+// Mostra o menu
 function showMenu() {
     menu.classList.remove('hidden');
     video.classList.remove('active');
@@ -124,6 +179,7 @@ function showMenu() {
     controls.classList.remove('visible');
 }
 
+// Entra em tela cheia
 function enterFullscreen() {
     if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen().catch(err => {
