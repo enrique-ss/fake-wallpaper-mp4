@@ -254,6 +254,7 @@ h1 {
   .video-label {
     padding: 10px;
     font-size: 14px;
+    display: none;
   }
 }
 
