@@ -8,7 +8,7 @@ Sabe aquele computador da escola/trabalho que não deixa você mudar o papel de 
 
 **A ideia:** Navegador em tela cheia = parece wallpaper animado 🎭
 
-## 🎯 Como Funciona (Resumão)
+## 🎯 Como Funciona
 
 1. Você abre uma página web
 2. Escolhe um vídeo de uma grade com 17 opções
