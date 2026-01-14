@@ -17,13 +17,12 @@ Sabe aquele computador da escola/trabalho que não deixa você mudar o papel de 
 
 **Resultado:** Seu desktop chato vira um fundo animado maneiro sem precisar de permissão de administrador.
 
-## 🚀 Usar É Fácil
+## 🚀 Como usar
 
 ### **Jeito Rápido (Teste)**
 1. Abra o arquivo `index.html` no navegador
 2. Clique em um dos 17 vídeos da grade
-3. Aperte **F11** para tela cheia
-4. Pronto! Já tá parecendo wallpaper
+3. Pronto! Já tá parecendo wallpaper
 
 ### **Jeito Automático (Windows)**
 Tem um arquivo `.bat` que abre tudo automaticamente em tela cheia:
