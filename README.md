@@ -1,4 +1,4 @@
-# 🎬 Fake Wallpaper - Wallpaper Animado Falso
+# 🎬 Fake Wallpaper
 
 Transforme vídeos em wallpapers animados falsos para computadores que não deixam você personalizar a tela de fundo. Simples assim: abre um navegador em tela cheia com vídeo em loop.
 
