@@ -115,7 +115,7 @@ Miniaturas em alta qualidade deixam carregamento lento. Pra ajustar:
 - Abre `script.js` (linha 43)
 - Muda `0.7` (70%) pra `0.5` (50%) ou `0.9` (90%)
 
-## ⚠️ Limitações (Seja Honesto)
+## ⚠️ Limitações
 
 - **Não é wallpaper real:** Precisa deixar navegador aberto
 - **Gasta mais bateria:** Vídeo sempre rodando consome recursos
@@ -139,7 +139,7 @@ Miniaturas em alta qualidade deixam carregamento lento. Pra ajustar:
 
 ---
 
-## 🛠️ Parte Técnica (Para Desenvolvedores)
+## 🛠️ Parte Técnica
 
 ### **Tech Stack**
 - **HTML5 Video API** - Player de vídeo nativo do navegador
